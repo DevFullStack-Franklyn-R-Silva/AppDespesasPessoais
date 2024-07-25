@@ -30,29 +30,45 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.blue,
-          foregroundColor: Colors.white,
-          title: Text('Despesas Pessoais'),
-        ),
-        body: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Container(
-                child: Card(
-                  color: Colors.blue,
-                  child: Text("Gráfico"),
-                  elevation: 5,
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
+        title: Text('Despesas Pessoais'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Container(
+            child: Card(
+              color: Colors.blue,
+              child: Text("Gráfico"),
+              elevation: 5,
+            ),
+          ),
+          Column(
+            children: _transactions.map((tr) {
+              return Card(
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      child: Text(
+                        tr.value.toString(),
+                      ),
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Text(tr.title),
+                        Text(tr.date.toString()),
+                      ],
+                    ),
+                  ],
                 ),
-              ),
-              Column(
-                children: _transactions.map((tr) {
-                  return Card(
-                    child: Text(tr.title),
-                  );
-                }).toList(),
-              )
-            ]));
+              );
+            }).toList(),
+          )
+        ],
+      ),
+    );
   }
 }

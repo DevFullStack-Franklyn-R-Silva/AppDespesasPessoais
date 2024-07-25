@@ -3,17 +3,18 @@ import "../model/transaction.dart";
 import 'package:intl/intl.dart';
 
 class TransactionList extends StatelessWidget {
-  final List<Transaction> transaction;
+  final List<Transaction> transactions;
 
-  TransactionList(this.transaction);
+  TransactionList(this.transactions);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 300,
-      child: SingleChildScrollView(
-        child: Column(
-          children: transaction.map((tr) {
+      child: ListView.builder(
+          itemCount: transactions.length,
+          itemBuilder: (context, index) {
+            final tr = transactions[index];
             return Card(
               child: Row(
                 children: <Widget>[
@@ -57,9 +58,7 @@ class TransactionList extends StatelessWidget {
                 ],
               ),
             );
-          }).toList(),
-        ),
-      ),
+          }),
     );
   }
 }

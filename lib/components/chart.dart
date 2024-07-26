@@ -1,3 +1,4 @@
+import 'package:despesas_pessoais/components/chart_bar.dart';
 import 'package:despesas_pessoais/model/transaction.dart';
 import "package:intl/intl.dart";
 import 'package:flutter/material.dart';
@@ -25,9 +26,6 @@ class Chart extends StatelessWidget {
         }
       }
 
-      print(DateFormat.E().format(weekDay)[0]);
-      print(totalSum);
-
       return {
         'day': DateFormat.E().format(weekDay)[0],
         "value": totalSum,
@@ -42,7 +40,13 @@ class Chart extends StatelessWidget {
       elevation: 6,
       margin: EdgeInsets.all(20),
       child: Row(
-        children: [],
+        children: groupedTransactions.map((tr) {
+          return ChartBar(
+            label: tr['day'] as String,
+            value: tr['value'] as double,
+            percentage: 0,
+          );
+        }).toList(),
       ),
     );
   }
